@@ -232,15 +232,29 @@ const poll = {
       )
     );
     console.log(answer);
-    // Resgister
+
+    // Resgister answer
     typeof answer === 'number' &&
       answer < this.answer.length &&
       this.answer[answer]++;
 
-    console.log(this.answers);
+    this.displayResults();
+    this.displayResults('strings');
+  },
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      // poll results are 13, 2, 4, 1
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
-// poll.registerNewAnswer();
+
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
