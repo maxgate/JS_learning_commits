@@ -1,6 +1,27 @@
 ///////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+const account1 = {
+  owner: "Jonas Schmedtmann",
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: "Jessica Davis",
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account4 = {
+  owner: "Sarah Smith",
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+const accounts = [account1, account2, account4];
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -237,7 +258,6 @@ const avg2 = calcAverageHumangeAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
 */
 
-
 /*
 //////////////////////////////////////
 // Converting from EUR to USD
@@ -254,22 +274,68 @@ const totalDepositsUSD = movements
 console.log(totalDepositsUSD);
 */
 
+/*
 ////////////////////////////////////////////
 // Coding Challenge #3
 
-const calcAverageHumangeAge = function (ages) {
-  const humanAges = ages.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
-  const adults = humanAges.filter((age) => age >= 18);
-    
-  const average = adults.reduce(
-    (acc, age, i, arr) => acc + age / arr.length,
-    0
-  );
-
-  return average;
-};
-
+// using Chaining method
+const calcAverageHumangeAge = (ages) =>
+  ages
+    .map((age) => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
 
 const avg1 = calcAverageHumangeAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumangeAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
+
+/*
+///////////////////////////////////////
+// The FIND Method
+
+const firstWithdrawal = movements.find((mov) => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const account = accounts.find((acc) => acc.owner === "Jessica Davis");
+console.log(account);
+
+// using for of loop
+let accountFor = "";
+for (const acc of accounts)
+  if (acc.owner === "Jessica Davis") {
+    accountFor = acc;
+    console.log(accountFor);
+  }
+*/
+
+/*
+////////////////////////////////////////
+// SOME AND EVERY METHOD
+
+// SOME
+console.log(movements);
+// Equality
+console.log(movements.includes(-130));
+
+// Condition
+console.log(movements.some((mov) => mov === -130));
+
+const anyDeposits = movements.some((mov) => mov > 0);
+console.log(anyDeposits);
+
+//EVERY
+console.log(movements.every((mov) => mov > 0));
+console.log(account4.movements.every((mov) => mov > 0));
+
+// Separate callback
+const deposit = (mov) => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
+*/
+
+// FLAT AND FLATEMAP
