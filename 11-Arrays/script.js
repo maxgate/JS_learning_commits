@@ -316,7 +316,7 @@ for (const acc of accounts)
 ////////////////////////////////////////
 // SOME AND EVERY METHOD
 
-// SOME
+/////// SOME
 console.log(movements);
 // Equality
 console.log(movements.includes(-130));
@@ -327,7 +327,7 @@ console.log(movements.some((mov) => mov === -130));
 const anyDeposits = movements.some((mov) => mov > 0);
 console.log(anyDeposits);
 
-//EVERY
+/////// EVERY
 console.log(movements.every((mov) => mov > 0));
 console.log(account4.movements.every((mov) => mov > 0));
 
@@ -338,4 +338,63 @@ console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
 */
 
-// FLAT AND FLATEMAP
+/*
+////////////////////////////////
+//// FLAT AND FLATEMAP
+// used when working with nexted arrays
+// FLAT
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+////////////////////////////
+// const accountMovements = accounts.map((acc) => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+const overalBalance = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatmap
+const overalBalance2 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+*/
+
+//////////////////////////////////////////
+// SORTING ARRAYS
+
+// Sorting with String
+const owners = ["Jonas", "Zach", "Adam", "Martha"];
+console.log(owners.sort()); // mutates the orginal arrays
+console.log(owners);
+
+// Numbers
+console.log(movements);
+
+// return < 0, A ,B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
