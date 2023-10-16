@@ -92,5 +92,3 @@ logo.contains('c'); // not includes
 // Don't use
 logo.className = 'max';
 */
-
-
