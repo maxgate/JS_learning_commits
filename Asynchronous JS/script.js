@@ -60,6 +60,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+/*
 const getCountryAndNeighbour = function (country) {
   // AJAX call country 1
   const request = new XMLHttpRequest();
@@ -106,3 +107,57 @@ setTimeout(() => {
     }, 1000);
   }, 1000);
 }, 1000);
+*/
+
+//////////////////////////////////
+// Promise
+// const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.com/v2/name/${country}`);
+//   request.send();
+
+// const request = fetch('https://restcountries.com/v2/name/nigeria');
+// console.log(request);
+
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0]);
+//     });
+// };
+
+const renderError = function(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+}
+
+const getCountryData = function (country) {
+  // country 1
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[1];
+
+      if (!neighbour) return;
+
+      // country 2
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => {
+      console.error(`${err}`)
+    })
+};
+
+btn.addEventListener('click', function(){
+  getCountryData('nigeria');
+});
+
+///////////////////////////////////////////
+/// handling promise error
